@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "authorized-jblab": {
+      "type": "http",
+      "url": "https://authorized-jailbreak-lab-mcp.vercel.app/api/mcp"
+    }
+  }
+}
