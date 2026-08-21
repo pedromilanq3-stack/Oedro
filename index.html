@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tokenly — gerencie tokens de API e créditos em um só lugar." />
+    <title>Tokenly — Tokens e créditos para suas APIs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Tokenly, início">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <span>Tokenly</span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <a class="active" href="#inicio">Início</a>
+        <a href="#tokens">Meus tokens</a>
+        <a href="#creditos">Créditos</a>
+      </nav>
+      <button class="avatar" aria-label="Abrir perfil de Ana">AN</button>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div>
+          <span class="eyebrow"><i></i> PAINEL DE CONTROLE</span>
+          <h1>APIs poderosas.<br /><em>Controle simples.</em></h1>
+          <p>Gere tokens seguros, acompanhe seu uso e adicione créditos em poucos cliques.</p>
+        </div>
+        <aside class="balance-card" aria-label="Saldo atual">
+          <div class="balance-head">
+            <span>SALDO DISPONÍVEL</span>
+            <span class="trend">↗ 12,4%</span>
+          </div>
+          <strong id="balance">R$ 240,00</strong>
+          <div class="usage-row"><span>Uso este mês</span><b>R$ 86,40</b></div>
+          <div class="progress"><span></span></div>
+          <div class="balance-footer">
+            <span>Próxima recarga: <b>—</b></span>
+            <button data-open-credits>Adicionar créditos <span>→</span></button>
+          </div>
+        </aside>
+      </section>
+
+      <section class="workspace" id="tokens">
+        <div class="section-heading">
+          <div>
+            <span class="step">01</span>
+            <h2>Gere seu token</h2>
+            <p>Crie uma chave exclusiva para conectar suas aplicações.</p>
+          </div>
+          <span class="secure"><i></i> GERAÇÃO SEGURA</span>
+        </div>
+
+        <div class="generator-grid">
+          <form class="generator-card" id="token-form">
+            <label for="token-name">Nome do token</label>
+            <input id="token-name" name="name" maxlength="32" placeholder="Ex: Aplicação principal" required />
+
+            <fieldset>
+              <legend>Ambiente</legend>
+              <div class="segmented">
+                <label><input type="radio" name="environment" value="Produção" checked /><span><i class="dot production"></i>Produção</span></label>
+                <label><input type="radio" name="environment" value="Teste" /><span><i class="dot test"></i>Teste</span></label>
+              </div>
+            </fieldset>
+
+            <label for="permission">Permissões</label>
+            <div class="select-wrap">
+              <select id="permission" name="permission">
+                <option>Leitura e escrita</option>
+                <option>Somente leitura</option>
+                <option>Acesso total</option>
+              </select>
+            </div>
+
+            <button class="primary-btn" type="submit"><span class="key-icon">⌁</span> Gerar novo token <span>→</span></button>
+            <p class="privacy"><span>◆</span> Seu token é criptografado e exibido apenas uma vez.</p>
+          </form>
+
+          <aside class="token-preview" id="token-preview">
+            <div class="preview-icon">⌁</div>
+            <span class="preview-label">SEU NOVO TOKEN APARECERÁ AQUI</span>
+            <div class="token-placeholder"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p>Preencha os dados ao lado e clique em<br /><b>“Gerar novo token”</b>.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="credits" id="creditos">
+        <div class="section-heading compact">
+          <div><span class="step">02</span><h2>Adicione créditos</h2></div>
+          <p>Escolha quanto deseja adicionar ao seu saldo.</p>
+        </div>
+        <div class="credit-options">
+          <button data-value="50"><span>R$</span><strong>50</strong><small>+ R$ 50 em créditos</small></button>
+          <button class="popular" data-value="100"><em>MAIS ESCOLHIDO</em><span>R$</span><strong>100</strong><small>+ R$ 5 de bônus</small></button>
+          <button data-value="250"><span>R$</span><strong>250</strong><small>+ R$ 20 de bônus</small></button>
+          <button class="custom-credit" data-open-credits><span>OUTRO VALOR</span><strong>＋</strong><small>Defina o valor</small></button>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="credit-dialog">
+      <button class="dialog-close" aria-label="Fechar">×</button>
+      <span class="eyebrow"><i></i> ADICIONAR CRÉDITOS</span>
+      <h2>Quanto você quer adicionar?</h2>
+      <p>O saldo fica disponível imediatamente após a confirmação.</p>
+      <label for="credit-value">Valor da recarga</label>
+      <div class="money-input"><span>R$</span><input id="credit-value" type="number" min="10" step="5" value="100" /></div>
+      <button class="primary-btn" id="confirm-credit">Continuar para pagamento <span>→</span></button>
+      <small>Ambiente demonstrativo — nenhuma cobrança será realizada.</small>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <footer><span>© 2026 Tokenly</span><span>Infraestrutura segura para suas ideias.</span><a href="#">Suporte</a></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
