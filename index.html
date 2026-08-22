@@ -21,6 +21,7 @@
       </a>
       <nav aria-label="Navegação principal">
         <a class="active" href="#inicio">Início</a>
+        <a href="#prompt">Comando IA</a>
         <a href="#tokens">Meus tokens</a>
         <a href="#creditos">Créditos</a>
       </nav>
@@ -49,10 +50,58 @@
         </aside>
       </section>
 
-      <section class="workspace" id="tokens">
+      <section class="prompt-studio" id="prompt" aria-labelledby="prompt-title">
         <div class="section-heading">
           <div>
             <span class="step">01</span>
+            <h2 id="prompt-title">Comando para sua IA</h2>
+            <p>Defina a criação e a configuração em um único comando pronto para usar.</p>
+          </div>
+          <span class="secure"><i></i> PROMPT FLEXÍVEL</span>
+        </div>
+
+        <div class="prompt-grid">
+          <form class="prompt-form" id="prompt-form">
+            <label for="creation-type">O que você quer criar?</label>
+            <div class="select-wrap">
+              <select id="creation-type" name="creationType">
+                <option value="um projeto completo">Projeto completo</option>
+                <option value="uma automação">Automação</option>
+                <option value="uma interface">Interface</option>
+                <option value="um conteúdo">Conteúdo</option>
+                <option value="uma integração">Integração</option>
+              </select>
+            </div>
+
+            <label for="creation-details">Descreva o resultado</label>
+            <textarea id="creation-details" name="details" rows="3" maxlength="280" placeholder="Ex.: uma landing page para um curso de fotografia" required></textarea>
+
+            <label for="configuration">Configurações e preferências</label>
+            <textarea id="configuration" name="configuration" rows="3" maxlength="280" placeholder="Ex.: visual minimalista, responsivo, em português e com formulário de contato"></textarea>
+
+            <fieldset class="delivery-fieldset">
+              <legend>Formato de entrega</legend>
+              <div class="segmented delivery-options">
+                <label><input type="radio" name="delivery" value="um passo a passo claro" checked /><span>Passo a passo</span></label>
+                <label><input type="radio" name="delivery" value="uma solução pronta para implementar" /><span>Pronto para usar</span></label>
+              </div>
+            </fieldset>
+
+            <button class="primary-btn" type="submit"><span class="key-icon">✦</span> Gerar comando <span>→</span></button>
+          </form>
+
+          <aside class="prompt-output" aria-live="polite">
+            <div class="prompt-output-head"><span>COMANDO GERADO</span><button type="button" class="copy-prompt" disabled>Copiar</button></div>
+            <pre id="prompt-result">Conte para a IA o que deseja criar e as configurações que ela deve seguir. Seu comando aparecerá aqui.</pre>
+            <p><span>✦</span> Você pode usar este comando em qualquer assistente de IA.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="workspace" id="tokens">
+        <div class="section-heading">
+          <div>
+            <span class="step">02</span>
             <h2>Gere seu token</h2>
             <p>Crie uma chave exclusiva para conectar suas aplicações.</p>
           </div>
@@ -96,7 +145,7 @@
 
       <section class="credits" id="creditos">
         <div class="section-heading compact">
-          <div><span class="step">02</span><h2>Adicione créditos</h2></div>
+          <div><span class="step">03</span><h2>Adicione créditos</h2></div>
           <p>Escolha quanto deseja adicionar ao seu saldo.</p>
         </div>
         <div class="credit-options">
