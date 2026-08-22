@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tokenly Prompt Studio</title>
+    <style>
+      :root { color:#17202b; font-family:Inter,system-ui,sans-serif; } * { box-sizing:border-box; } body { margin:0; padding:16px; background:#f6f3ed; } main { max-width:720px; margin:auto; background:#fff; border:1px solid #deddd8; box-shadow:0 12px 35px rgba(27,35,31,.08); } header { padding:24px 26px 18px; background:#10251f; color:#fff; } header span { color:#70d9aa; font-size:11px; font-weight:700; letter-spacing:1.3px; } h1 { margin:8px 0 0; font-size:24px; } form { padding:24px 26px; display:grid; gap:16px; } label, legend { display:block; margin-bottom:7px; font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; } select, textarea { width:100%; border:1px solid #d8d8d3; background:#fbfbf9; padding:11px 12px; color:#17202b; font:inherit; } textarea { min-height:76px; resize:vertical; } fieldset { border:0; padding:0; margin:0; } .delivery { display:flex; gap:8px; } .delivery label { flex:1; margin:0; text-transform:none; letter-spacing:0; } .delivery input { position:absolute; opacity:0; } .delivery span { display:block; border:1px solid #d8d8d3; padding:11px; text-align:center; cursor:pointer; } .delivery input:checked + span { border-color:#17202b; box-shadow:inset 0 0 0 1px #17202b; } button { border:0; padding:13px 16px; background:#26c480; color:#0d3528; font:inherit; font-size:13px; font-weight:700; cursor:pointer; } button:hover { background:#31d38e; } #result { margin:0 26px 26px; padding:16px; border:1px solid #d9e6df; background:#f0f8f4; color:#234b3c; font:13px/1.6 ui-monospace,SFMono-Regular,monospace; white-space:pre-wrap; overflow-wrap:anywhere; } #result[hidden] { display:none; } .copy { display:none; margin:0 26px 26px; width:calc(100% - 52px); background:#10251f; color:#fff; } .copy.visible { display:block; } .status { min-height:18px; margin:0 26px 18px; color:#61716a; font-size:12px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header><span>✦ TOKENLY PROMPT STUDIO</span><h1>Crie um comando para sua IA</h1></header>
+      <form id="prompt-form">
+        <div><label for="creation-type">O que você quer criar?</label><select id="creation-type"><option value="um projeto completo">Projeto completo</option><option value="uma automação">Automação</option><option value="uma interface">Interface</option><option value="um conteúdo">Conteúdo</option><option value="uma integração">Integração</option></select></div>
+        <div><label for="details">Descreva o resultado</label><textarea id="details" maxlength="280" required placeholder="Ex.: uma landing page para um curso de fotografia"></textarea></div>
+        <div><label for="configuration">Configurações e preferências</label><textarea id="configuration" maxlength="280" placeholder="Ex.: visual minimalista, responsivo e em português"></textarea></div>
+        <fieldset><legend>Formato de entrega</legend><div class="delivery"><label><input name="delivery" type="radio" value="um passo a passo claro" checked /><span>Passo a passo</span></label><label><input name="delivery" type="radio" value="uma solução pronta para implementar" /><span>Pronto para usar</span></label></div></fieldset>
+        <button type="submit">Gerar comando</button>
+      </form>
+      <p class="status" id="status" aria-live="polite"></p><pre id="result" hidden></pre><button class="copy" id="copy" type="button">Copiar comando</button>
+    </main>
+    <script>
+      const form = document.querySelector('#prompt-form'); const result = document.querySelector('#result'); const copy = document.querySelector('#copy'); const status = document.querySelector('#status');
+      const localPrompt = input => { const configuration = input.configuration.trim() ? `\nConfigurações obrigatórias: ${input.configuration.trim()}.` : '\nUse boas práticas, uma estrutura organizada e uma experiência acessível.'; return `Atue como um especialista multidisciplinar. Crie ${input.creationType} com este objetivo: ${input.details.trim()}.${configuration}\n\nAntes de finalizar, valide se a solução atende ao objetivo, explique escolhas relevantes e entregue ${input.delivery}. Se precisar assumir algo, declare a suposição e escolha a alternativa mais útil.`; };
+      const showResult = prompt => { result.textContent = prompt; result.hidden = false; copy.classList.add('visible'); };
+      form.addEventListener('submit', async event => { event.preventDefault(); const input = { creationType: document.querySelector('#creation-type').value, details: document.querySelector('#details').value, configuration: document.querySelector('#configuration').value, delivery: document.querySelector('input[name="delivery"]:checked').value }; status.textContent = 'Gerando comando…'; try { if (!window.openai?.callTool) throw new Error('Bridge indisponível'); const response = await window.openai.callTool('generate_creation_prompt', input); showResult(response?.structuredContent?.prompt ?? response?.content?.[0]?.text ?? localPrompt(input)); status.textContent = 'Comando gerado com sucesso.'; } catch { showResult(localPrompt(input)); status.textContent = 'Comando gerado localmente.'; } });
+      copy.addEventListener('click', async () => { await navigator.clipboard.writeText(result.textContent); status.textContent = 'Comando copiado para a área de transferência.'; });
+    </script>
+  </body>
+</html>
