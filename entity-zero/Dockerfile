@@ -6,11 +6,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-COPY bundle.zip.b64 /tmp/bundle.zip.b64
+COPY bundle.part*.b64 /tmp/
 RUN python - <<'PY'
 import base64, zipfile
 from pathlib import Path
-raw = base64.b64decode(Path('/tmp/bundle.zip.b64').read_text())
+parts = sorted(Path('/tmp').glob('bundle.part*.b64'))
+encoded = ''.join(part.read_text() for part in parts)
+raw = base64.b64decode(encoded, validate=True)
 Path('/tmp/bundle.zip').write_bytes(raw)
 with zipfile.ZipFile('/tmp/bundle.zip') as z:
     z.extractall('/app')
