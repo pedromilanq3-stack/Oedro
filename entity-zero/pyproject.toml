@@ -1,0 +1,9 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "entity-zero-bootstrap"
+version = "0.1.0"
+description = "Bootstrap package for ENTITY-0 Railway runtime"
+requires-python = ">=3.11"
