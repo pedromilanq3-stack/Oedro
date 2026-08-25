@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - apk-build-android-swipe-automator
+  pull_request:
+    branches:
+      - claude/mcp-tw0s6e
   workflow_dispatch:
 
 jobs:
