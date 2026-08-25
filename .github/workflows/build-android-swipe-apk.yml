@@ -24,6 +24,7 @@ jobs:
           base64 -d /tmp/source.b64 > /tmp/android-swipe-automator-source.zip
           unzip -t /tmp/android-swipe-automator-source.zip
           unzip -q /tmp/android-swipe-automator-source.zip -d .
+          cp .apk-build/TestDeckScreen.kt android-swipe-automator/app/src/main/java/com/example/swipeautomator/ui/TestDeckScreen.kt
 
       - name: Set up Java 17
         uses: actions/setup-java@v4
