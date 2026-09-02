@@ -44,3 +44,29 @@ npm start
 ```
 
 Para instalar no seu ChatGPT, publique esse serviço em uma URL HTTPS estável e use o endpoint `https://SEU-DOMINIO/mcp`. Em seguida, ative o **Developer mode** em **Settings → Security and login**, abra [ChatGPT Plugins](https://chatgpt.com/plugins), crie um plugin com a URL do endpoint e instale-o em um chat da aba **Work**. O endpoint local `http://localhost:8787/mcp` serve apenas para teste com o MCP Inspector.
+
+## Skill `book-to-skill`
+
+O repositório inclui a skill [book-to-skill](https://github.com/virgiliojr94/book-to-skill)
+(MIT) em `.claude/skills/book-to-skill/`. Ela converte um livro ou documento
+(PDF, EPUB, DOCX, HTML, Markdown, texto, RTF, MOBI/AZW com Calibre) em uma skill
+de agente estruturada, com índice por capítulo carregado sob demanda.
+
+Uso em uma sessão do Claude Code neste projeto:
+
+```
+/book-to-skill ./caminho/do/livro.pdf
+```
+
+Os extratores em Python são opcionais — há fallback de biblioteca padrão para
+todos os formatos, exceto MOBI/AZW (requer Calibre). Para a melhor qualidade de
+extração:
+
+```bash
+python3 -m pip install pypdf pdfminer.six ebooklib beautifulsoup4 python-docx striprtf
+python3 .claude/skills/book-to-skill/scripts/extract.py --check
+```
+
+> Atenção: a única origem oficial é `virgiliojr94/book-to-skill`. Veja
+> `.claude/skills/book-to-skill/SECURITY-NOTICE.md` sobre um clone malicioso
+> publicado por terceiros.
