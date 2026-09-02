@@ -71,10 +71,10 @@ python3 .claude/skills/book-to-skill/scripts/extract.py --check
 > `.claude/skills/book-to-skill/SECURITY-NOTICE.md` sobre um clone malicioso
 > publicado por terceiros.
 
-## Personas (Mariana, Teo, Otto, Lívia, Dante)
+## Personas (Mariana, Teo, Otto, Lívia, Dante, Caio)
 
 Os "cérebros" dos funcionários virtuais da empresa. Os do lado Claude (Mariana Lemos, Teo Lins,
 Otto Faria) são skills de projeto em `.claude/skills/` e carregam sozinhos em qualquer sessão do
-Claude Code neste repositório — basta chamar pelo nome. Os do lado GPT (Lívia Sartori, Dante Vilar)
+Claude Code neste repositório — basta chamar pelo nome. Os do lado GPT (Lívia Sartori, Dante Vilar, Caio Valença)
 ficam em `personas/gpt/` como fonte canônica para colar num Custom GPT. Mapa completo, pares e
 regras de memória em `personas/README.md`.
